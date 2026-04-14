@@ -1,0 +1,107 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #222;
+}
+
+.header {
+    background-color: #4b2e83;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.header p {
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+.nav {
+    background-color: #333;
+    text-align: center;
+    padding: 12px;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+}
+
+.nav a:hover {
+    color: yellow;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+}
+
+.section {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+}
+
+.section h2 {
+    color: #4b2e83;
+}
+
+ul, ol {
+    padding-left: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #ddd;
+}
+
+.footer {
+    background-color: #4b2e83;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 600px) {
+    .container {
+        width: 95%;
+    }
+
+    .nav a {
+        display: block;
+        margin: 10px 0;
+    }
+
+    .header h1 {
+        font-size: 1.5rem;
+    }
+
+    table, th, td {
+        font-size: 14px;
+    }
+}
