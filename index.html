@@ -9,8 +9,9 @@
 <body>
 
     <div class="header">
-        <h1>KUET Artists' Society - Kolpopot</h1>
+        <h1 id="mainTitle">KUET Artists' Society - Kolpopot</h1>
         <p>A simple portfolio webpage for the club</p>
+        <button id="colorBtn">Change Header Color</button>
     </div>
 
     <div class="nav">
@@ -24,22 +25,24 @@
 
         <div class="section" id="about">
             <h2>About the Club</h2>
-            <p>
+            <p id="aboutText">
                 Kolpopot is the artists' society of KUET. It is a creative club that works
-                with art, exhibitions, competitions, and cultural activities. The club gives
-                students a platform to show their creativity and participate in artistic events.
+                with art, exhibitions, competitions, and cultural activities.
             </p>
+            <button onclick="changeText()">Learn More</button>
         </div>
 
         <div class="section" id="events">
             <h2>Major Events</h2>
-            <ul>
+            <ul id="eventList">
                 <li>Beyond The Palette - Season 2</li>
                 <li>Beyond The Palette - Season 3</li>
                 <li>Beyond The Palette - Season 4</li>
                 <li>Brush Stroke of Harmony - Season 3</li>
                 <li>Club Fair 2025 Participation</li>
             </ul>
+            <button onclick="countEvents()">Count Events</button>
+            <p id="eventCount"></p>
         </div>
 
         <div class="section" id="activities">
@@ -52,6 +55,8 @@
                 <li>Participating in university club fairs</li>
                 <li>Promoting student creativity through social media</li>
             </ol>
+            <button onclick="showClubInfo()">Show Club Info</button>
+            <p id="clubInfo"></p>
         </div>
 
         <div class="section">
@@ -82,8 +87,10 @@
 
         <div class="section" id="contact">
             <h2>Contact</h2>
-            <p>Email: kolpopotkuet@gmail.com</p>
+            <p>Email: <span id="emailText">kolpopotkuet@gmail.com</span></p>
             <p>Location: KUET, Khulna</p>
+            <button onclick="showAlert()">Show Contact</button>
+            <button onclick="toggleEmail()">Hide/Show Email</button>
             <p>
                 Facebook Page:
                 <a href="https://www.facebook.com/kolpopot/" target="_blank">
@@ -95,8 +102,9 @@
     </div>
 
     <div class="footer">
-        <p>&copy; 2026 Kolpopot Portfolio</p>
+        <p id="footerText">&copy; 2026 Kolpopot Portfolio</p>
     </div>
 
+    <script src="script.js"></script>
 </body>
 </html>
