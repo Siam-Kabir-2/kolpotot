@@ -1,80 +1,115 @@
-// Variables
-const clubName = "Kolpopot";
-let headerChanged = false;
+document.addEventListener("DOMContentLoaded", () => {
+  // Initialize Lucide icons (already done in HTML, but good to ensure)
+  if (typeof lucide !== "undefined") {
+    lucide.createIcons();
+  }
 
-// Array
-const events = [
-    "Beyond The Palette - Season 2",
-    "Beyond The Palette - Season 3",
-    "Beyond The Palette - Season 4",
-    "Brush Stroke of Harmony - Season 3",
-    "Club Fair 2025 Participation"
-];
-
-// Object
-const club = {
-    name: "Kolpopot",
-    university: "KUET",
-    location: "Khulna",
-    type: "Artists' Society"
-};
-
-// Function with DOM + innerHTML
-function changeText() {
-    document.getElementById("aboutText").innerHTML =
-        "Kolpopot is a creative student club of KUET that organizes exhibitions, competitions, and artistic programs for students.";
-}
-
-// Function using array + length
-function countEvents() {
-    document.getElementById("eventCount").innerHTML =
-        "Total major events: " + events.length;
-}
-
-// Function using object
-function showClubInfo() {
-    document.getElementById("clubInfo").innerHTML =
-        "Club Name: " + club.name + ", University: " + club.university +
-        ", Location: " + club.location;
-}
-
-// Output with alert
-function showAlert() {
-    alert("Contact: kolpopotkuet@gmail.com");
-}
-
-// If else + style change
-function toggleEmail() {
-    let email = document.getElementById("emailText");
-
-    if (email.style.display === "none") {
-        email.style.display = "inline";
+  // Navbar Scroll Effect
+  const topbar = document.getElementById("topbar");
+  const handleScroll = () => {
+    if (window.scrollY > 20) {
+      topbar.classList.add("scrolled");
     } else {
-        email.style.display = "none";
+      topbar.classList.remove("scrolled");
     }
-}
+  };
+  window.addEventListener("scroll", handleScroll);
+  handleScroll(); // Initial check
 
-// for loop example
-function showEventsInConsole() {
-    for (let i = 0; i < events.length; i++) {
-        console.log(events[i]);
-    }
-}
+  // Mobile Menu Toggle
+  const menuToggle = document.getElementById("menu-toggle");
+  const navLinks = document.getElementById("nav-links");
 
-// querySelector + addEventListener
-const colorBtn = document.querySelector("#colorBtn");
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      navLinks.classList.toggle("active");
+      const icon = menuToggle.querySelector("i");
+      if (navLinks.classList.contains("active")) {
+        icon.setAttribute("data-lucide", "x");
+      } else {
+        icon.setAttribute("data-lucide", "menu");
+      }
+      lucide.createIcons();
+    });
 
-colorBtn.addEventListener("click", function () {
-    const header = document.querySelector(".header");
+    // Close menu when clicking outside
+    document.addEventListener("click", () => {
+      if (navLinks.classList.contains("active")) {
+        navLinks.classList.remove("active");
+        menuToggle.querySelector("i").setAttribute("data-lucide", "menu");
+        lucide.createIcons();
+      }
+    });
 
-    if (headerChanged === false) {
-        header.style.backgroundColor = "darkgreen";
-        headerChanged = true;
-    } else {
-        header.style.backgroundColor = "#4b2e83";
-        headerChanged = false;
-    }
+    // Close menu when clicking a link
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("active");
+        menuToggle.querySelector("i").setAttribute("data-lucide", "menu");
+        lucide.createIcons();
+      });
+    });
+  }
+
+  // Smooth Reveal Animations with Intersection Observer
+  const observerOptions = {
+    threshold: 0.15,
+    rootMargin: "0px 0px -50px 0px",
+  };
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("revealed");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Dynamic animation delay for grid items
+  const animateElements = (selector, delayIncrement = 100) => {
+    const elements = document.querySelectorAll(selector);
+    elements.forEach((el, index) => {
+      el.classList.add("reveal-item");
+      el.style.transitionDelay = `${index * delayIncrement}ms`;
+      revealObserver.observe(el);
+    });
+  };
+
+  // Apply animations
+  animateElements(".stat-item", 150);
+  animateElements(".gallery-card", 200);
+  animateElements(".feature-item", 150);
+  animateElements(".membership-form", 0);
+  animateElements(".membership-sidebar", 120);
+  animateElements(
+    ".foundation-content, .foundation-img, .contact-card, .section-header",
+    0,
+  );
+
+  // Add CSS for reveal animations dynamically
+  const revealStyles = document.createElement("style");
+  revealStyles.textContent = `
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        .reveal-item.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Specific reveal for different elements */
+        .foundation-img.reveal-item {
+            transform: scale(0.95) translateY(20px);
+        }
+        .foundation-img.reveal-item.revealed {
+            transform: scale(1) translateY(0);
+        }
+    `;
+  document.head.appendChild(revealStyles);
+
+  console.log("Kolpopot | UI/UX Pro Max Edition Loaded");
 });
-
-// Call function once
-showEventsInConsole();
